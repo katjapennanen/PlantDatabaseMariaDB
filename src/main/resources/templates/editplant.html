@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Edit a plant</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	
+		<h1>Edit a plant</h1>
+			<form th:object="${plant}" th:action="@{../save}" action="#" method="post">
+				<input type="hidden" th:field="*{id}" />
+				
+				<label for="engname">English name</label>
+				<input type="text" id="engname" th:field="*{names.engName}"  />
+			
+		  		<label for="latname">Latin name</label>
+				<input type="text" id="latname" th:field="*{names.latName}"  />
+			
+		  		<label for="finname">Finnish name</label>
+		  		<input type="text" id="finname" th:field="*{names.finName}"  />
+			
+				<label for="water">Watering</label>
+				<input type="text" id="water" th:field="*{needs.water}"  />
+			
+				<label for="light">Light</label>
+				<input type="text" id="light" th:field="*{needs.light}" />
+				
+				<label for="fertilizer">Fertilizer</label>
+				<input type="text" id="fertilizer" th:field="*{needs.fertilizer}" />
+				
+				<label for="repot">Repotting</label>
+				<input type="text" id="repotting" th:field="*{needs.repotting}" />
+				
+				<label for="repotdate">Repotted last</label>
+				<input type="text" id="repotdate" th:field="*{repotDate}" />
+				
+				<input type="submit" value="Save">
+			</form>
+</body>
+</html>

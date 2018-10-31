@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" >
+	<head>
+		<title>Plants</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style>
+			table, th, td {
+			   border: 1px solid black;
+			   border-spacing: 0px;
+			}
+			th, td {
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+	<h1>Houseplant Extravaganza</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>English name</th>
+					<th>Latin name</th>
+					<th>Finnish name</th>
+					<th>Water</th>
+					<th>Light</th>
+					<th>Fertilizer</th>
+					<th>Repotting</th>
+					<th>Repotted last</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="plant : ${plantList}">
+					<td th:text="${plant.names.engName}"></td>
+					<td th:text="${plant.names.latName}"></td>
+					<td th:text="${plant.names.finName}"></td>
+					<td th:text="${plant.needs.water}"></td>
+					<td th:text="${plant.needs.light}"></td>
+					<td th:text="${plant.needs.fertilizer}"></td>
+					<td th:text="${plant.needs.repotting}"></td>
+					<td th:text="${plant.repotDate}"></td>
+					<td><a th:href="@{/edit/{id}(id=${plant.id})}">Edit</a></td>
+					<td><a th:href="@{/delete/{id}(id=${plant.id})}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<a href="/addplant">Add a plant</a>
+		
+	</body>
+</html>
