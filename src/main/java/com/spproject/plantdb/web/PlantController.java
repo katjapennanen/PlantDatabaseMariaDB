@@ -1,6 +1,7 @@
 package com.spproject.plantdb.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,12 @@ public class PlantController {
 	private LightTypeRepository lrepo;
 	@Autowired
 	private FertilizerTypeRepository frepo;
+	
+	// Login page listener
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }
 
 	// Show all plants
 	@RequestMapping("/home")
@@ -33,6 +40,7 @@ public class PlantController {
 	}
 
 	// Add new plant
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/addplant")
 	public String addPlant(Model model) {
 		model.addAttribute("plant", new Plant());
@@ -43,6 +51,7 @@ public class PlantController {
 	}
 
 	// Edit a plant
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/edit/{id}")
 	public String editPlant(@PathVariable("id") Long plantId, Model model) {
 		model.addAttribute("plant", prepo.findById(plantId));
@@ -53,6 +62,7 @@ public class PlantController {
 	}
 
 	// Delete a plant
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deletePlant(@PathVariable("id") Long plantId, Model model) {
 		prepo.deleteById(plantId);
@@ -60,6 +70,7 @@ public class PlantController {
 	}
 
 	// Save a plant
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Plant plant) {
 		prepo.save(plant);
