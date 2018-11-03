@@ -1,56 +1,112 @@
 package com.spproject.plantdb.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-@Document(collection = "Plants")
+@Entity
 public class Plant {
-	
+
 	@Id
-	private String id;
-	private Names names;
-	private Needs needs;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long plantId;
+	private String engName;
+	private String latName;
+	private String finName;
 	private String repotDate;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "waterId")
+	private WaterType wtype;
+
+	@ManyToOne
+	@JoinColumn(name = "lightId")
+	private LightType ltype;
+
+	@ManyToOne
+	@JoinColumn(name = "fertilizerId")
+	private FertilizerType ftype;
+
 	public Plant() {
 	}
 
-	public Plant(Names names, Needs needs, String repotDate) {
-		this.names = names;
-		this.needs = needs;
+	public Plant(String engName, String latName, String finName, WaterType wtype, LightType ltype, FertilizerType ftype,
+			String repotDate) {
+		super();
+		this.engName = engName;
+		this.latName = latName;
+		this.finName = finName;
+		this.wtype = wtype;
+		this.ltype = ltype;
+		this.ftype = ftype;
 		this.repotDate = repotDate;
 	}
 
-	public String getId() {
-		return id;
+	public Long getPlantId() {
+		return plantId;
 	}
 
-	public Names getNames() {
-		return names;
+	public String getEngName() {
+		return engName;
 	}
 
-	public Needs getNeeds() {
-		return needs;
+	public String getLatName() {
+		return latName;
+	}
+
+	public String getFinName() {
+		return finName;
 	}
 
 	public String getRepotDate() {
 		return repotDate;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public WaterType getWtype() {
+		return wtype;
 	}
 
-	public void setNames(Names names) {
-		this.names = names;
+	public LightType getLtype() {
+		return ltype;
 	}
 
-	public void setNeeds(Needs needs) {
-		this.needs = needs;
+	public FertilizerType getFtype() {
+		return ftype;
+	}
+
+	public void setPlantId(Long plantId) {
+		this.plantId = plantId;
+	}
+
+	public void setEngName(String engName) {
+		this.engName = engName;
+	}
+
+	public void setLatName(String latName) {
+		this.latName = latName;
+	}
+
+	public void setFinName(String finName) {
+		this.finName = finName;
 	}
 
 	public void setRepotDate(String repotDate) {
 		this.repotDate = repotDate;
 	}
-}
 
+	public void setWtype(WaterType wtype) {
+		this.wtype = wtype;
+	}
+
+	public void setLtype(LightType ltype) {
+		this.ltype = ltype;
+	}
+
+	public void setFtype(FertilizerType ftype) {
+		this.ftype = ftype;
+	}
+
+}

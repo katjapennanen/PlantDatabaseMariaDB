@@ -6,9 +6,7 @@ public class Needs {
 	private String fertilizer;
 	private String repotting;
 	
-	public Needs() {
-		
-	}
+	public Needs() {}
 
 	public Needs(String water, String light, String fertilizer, String repotting) {
 		this.water = water;

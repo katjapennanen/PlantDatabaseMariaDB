@@ -10,28 +10,31 @@
 			<form th:object="${plant}" th:action="@{save}" action="#" method="post">
 				
 				<label for="engname">English name</label>
-				<input type="text" id="engname" th:field="*{names.engName}"  />
+				<input type="text" id="engname" th:field="*{engName}"  />
 			
 		  		<label for="latname">Latin name</label>
-				<input type="text" id="latname" th:field="*{names.latName}"  />
+				<input type="text" id="latname" th:field="*{latName}"  />
 			
 		  		<label for="finname">Finnish name</label>
-		  		<input type="text" id="finname" th:field="*{names.finName}"  />
+		  		<input type="text" id="finname" th:field="*{finName}"  />
 			
-				<label for="water">Watering</label>
-				<input type="text" id="water" th:field="*{needs.water}"  />
-			
-				<label for="light">Light</label>
-				<input type="text" id="light" th:field="*{needs.light}" />
-				
-				<label for="fertilizer">Fertilizer</label>
-				<input type="text" id="fertilizer" th:field="*{needs.fertilizer}" />
-				
-				<label for="repot">Repotting</label>
-				<input type="text" id="repotting" th:field="*{needs.repotting}" />
+				<label for="waterlist">Watering need</label>
+			 	<select id="waterlist" th:field="*{wtype}">
+       				<option th:each="wtype: ${wtypes}" th:value="${wtype.waterId}" th:text="${wtype.name}"></option>
+    			</select>
+    			
+    			<label for="lightlist">Light condition</label>
+			 	<select id="lightlist" th:field="*{ltype}">
+       				<option th:each="ltype: ${ltypes}" th:value="${ltype.lightId}" th:text="${ltype.name}"></option>
+    			</select>
+    			
+    			<label for="ferlist">Fertilizing frequency</label>
+			 	<select id="ferlist" th:field="*{ftype}">
+       				<option th:each="ftype: ${ftypes}" th:value="${ftype.fertilizerId}" th:text="${ftype.name}"></option>
+    			</select>
 				
 				<label for="repotdate">Repotted last</label>
-				<input type="text" id="repotdate" th:field="*{repotDate}" />
+				<input type="date" id="repotdate" th:field="*{repotDate}" />
 				
 				<button type="submit">Save</button>
 			</form>
