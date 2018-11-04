@@ -8,7 +8,6 @@
 	
 		<h1>Add a plant</h1>
 			<form th:object="${plant}" th:action="@{save}" action="#" method="post">
-				
 				<label for="engname">English name</label>
 				<input type="text" id="engname" th:field="*{engName}"  />
 			

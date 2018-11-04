@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	<head>
+		<title>Plants</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style>
+			table, th, td {
+			   border: 1px solid black;
+			   border-spacing: 0px;
+			}
+			th, td {
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+	<h1>Houseplant Extravaganza</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Watering type</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="wtype : ${wtypes}">
+					<td th:text="${wtype.name}"></td>
+					<td><a th:href="@{/edittypes/{id}(id=${wtype.waterId})}">Edit</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<thead>
+				<tr>
+					<th>Light type</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="ltype : ${ltypes}">
+					<td th:text="${ltype.name}"></td>
+					<td><a th:href="@{/edittypes/{id}(id=${ltype.lightId})}">Edit</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<thead>
+				<tr>
+					<th>Fertilizing type</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="ftype : ${ftypes}">
+					<td th:text="${ftype.name}"></td>
+					<td><a th:href="@{/edittypes/{id}(id=${ftype.fertilizerId})}">Edit</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

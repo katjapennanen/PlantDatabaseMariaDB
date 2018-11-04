@@ -56,7 +56,7 @@ public class PlantdbApplication {
 					frepo.findByName("Couple times a month").get(0), "2018-12-12"));
 
 			prepo.save(new Plant("Elephant Ear Plant", "Alocasia", "Juurakkovehka",
-					wrepo.findByName("Let soil dry almost completely").get(0), lrepo.findByName("Filtered sun").get(0),
+					wrepo.findByName("Do not let dry out").get(0), lrepo.findByName("Filtered sun").get(0),
 					frepo.findByName("Weekly").get(0), "2018-12-12"));
 
 			// Create users: admin/admin user/user

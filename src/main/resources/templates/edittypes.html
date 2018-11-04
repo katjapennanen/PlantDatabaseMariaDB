@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Edit a plant</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Edit a type</h1>
+	
+			<form th:object="${wtype}" th:action="@{../savewater}" action="#" method="post">
+				<input type="hidden" th:field="*{waterId}" />
+				<label for="watertype">Watering type: </label>
+				<input type="text" id="watertype" th:field="*{name}"  />
+				<input type="submit" value="Save">
+			</form>
+	
+			<form th:object="${ltype}" th:action="@{../savelight}" action="#" method="post">
+				<input type="hidden" th:field="*{lightId}" />
+				<label for="lighttype">Light type: </label>
+				<input type="text" id="lighttype" th:field="*{name}"  />
+				<input type="submit" value="Save">
+			</form>
+		
+			<form th:object="${ftype}" th:action="@{../savefertilizer}" action="#" method="post">
+				<input type="hidden" th:field="*{fertilizerId}" />
+				<label for="fertilizertype">Fertilizer type: </label>
+				<input type="text" id="fertilizertype" th:field="*{name}"  />
+				<input type="submit" value="Save">
+			</form>
+			
+</body>
+</html>

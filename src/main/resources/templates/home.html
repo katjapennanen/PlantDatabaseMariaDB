@@ -19,6 +19,7 @@
 	</form>
 	<h1>Houseplant Extravaganza</h1>
 	<h3 th:inline="text">Welcome, [[${#httpServletRequest.remoteUser}]]</h3>
+	
 		<table>
 			<thead>
 				<tr>
@@ -49,6 +50,8 @@
 		</table>
 		
 		<a sec:authorize="hasAuthority('ADMIN')" href="/addplant">Add a plant</a>
+		<a sec:authorize="hasAuthority('ADMIN')" href="/types">Edit types</a>
+		<a sec:authorize="hasAuthority('ADMIN')" href="/addtypes">Add types</a>
 		
 	</body>
 </html>
