@@ -47,14 +47,14 @@ public class PlantdbApplication {
 
 			// Creating fertilizing frequencies
 			frepo.save(new FertilizerType("Max once a month"));
-			frepo.save(new FertilizerType("Couple times a month"));
+			frepo.save(new FertilizerType("Couple of times per month"));
 			frepo.save(new FertilizerType("Weekly"));
 
 			// Save couple new plants
 			prepo.save(new Plant("Pilea", "Pilea peperomioides", "Kilpipiilea",
 					wrepo.findByName("Let soil dry almost completely").get(0), 
 					lrepo.findByName("Partial Shade").get(0),
-					frepo.findByName("Couple times a month").get(0), "2018-12-12"));
+					frepo.findByName("Couple of times per month").get(0), "2018-12-12"));
 
 			prepo.save(new Plant("Elephant Ear Plant", "Alocasia", "Juurakkovehka",
 					wrepo.findByName("Do not let dry out").get(0), 

@@ -38,21 +38,45 @@ public class PlantController {
 	}
 
 	// Show all plants
-	@RequestMapping("/home")
+	@RequestMapping(value = "/home")
 	public String home(Model model) {
 		model.addAttribute("plants", prepo.findAll());
 		return "home";
 	}
 
-	// Search plants
-	@GetMapping("/search")
-	public String search(@RequestParam(name = "searchterm") String searchterm, Model model) {
+	// Sort by English name
+	@RequestMapping(value = "/sorteng")
+	public String sorteng(Model model) {
+		model.addAttribute("plants", prepo.findAllByOrderByEngNameAsc());
+		return "home";
+	}
+
+	// Sort by Latin name
+	@RequestMapping(value = "/sortlat")
+	public String sortlat(Model model) {
+		model.addAttribute("plants", prepo.findAllByOrderByLatNameAsc());
+		return "home";
+	}
+
+	// Sort By Finnish name
+	@RequestMapping(value = "/sortfin")
+	public String sortfin(Model model) {
+		model.addAttribute("plants", prepo.findAllByOrderByFinNameAsc());
+		return "home";
+	}
+
+	// Search plants by any attribute except repotDate
+	@GetMapping(value = "/search")
+	public String searchName(@RequestParam(name = "searchterm") String searchterm, Model model) {
 		String term1 = searchterm;
 		String term2 = searchterm;
 		String term3 = searchterm;
-		model.addAttribute("plants",
-				prepo.findByEngNameIgnoreCaseContainingOrLatNameIgnoreCaseContainingOrFinNameIgnoreCaseContaining(
-				term1, term2, term3));
+		String term4 = searchterm;
+		String term5 = searchterm;
+		String term6 = searchterm;
+		model.addAttribute("plants", prepo
+				.findByEngNameIgnoreCaseContainingOrLatNameIgnoreCaseContainingOrFinNameIgnoreCaseContainingOrWtype_NameIgnoreCaseContainingOrLtype_NameIgnoreCaseContainingOrFtype_NameIgnoreCaseContaining(
+						term1, term2, term3, term4, term5, term6));
 		return "home";
 	}
 
@@ -80,7 +104,7 @@ public class PlantController {
 
 	// Show all types
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@RequestMapping("/types")
+	@RequestMapping(value = "/types")
 	public String types(Model model) {
 		model.addAttribute("wtypes", wrepo.findAll());
 		model.addAttribute("ltypes", lrepo.findAll());
@@ -148,6 +172,19 @@ public class PlantController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Plant plant) {
+
+		String engName = plant.getEngName();
+		String engName2 = engName.substring(0, 1).toUpperCase() + engName.substring(1);
+		plant.setEngName(engName2);
+
+		String latName = plant.getLatName();
+		String latName2 = latName.substring(0, 1).toUpperCase() + latName.substring(1);
+		plant.setLatName(latName2);
+
+		String finName = plant.getFinName();
+		String finName2 = finName.substring(0, 1).toUpperCase() + finName.substring(1);
+		plant.setFinName(finName2);
+
 		prepo.save(plant);
 		return "redirect:home";
 	}
