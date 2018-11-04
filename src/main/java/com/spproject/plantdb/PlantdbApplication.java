@@ -35,7 +35,7 @@ public class PlantdbApplication {
 			// New watering types
 			wrepo.save(new WaterType("Let soil dry almost completely"));
 			wrepo.save(new WaterType("Let top of the soil dry"));
-			wrepo.save(new WaterType("Let dry ony slightly"));
+			wrepo.save(new WaterType("Let dry only slightly"));
 			wrepo.save(new WaterType("Do not let dry out"));
 
 			// Creating lighting need types
@@ -52,16 +52,18 @@ public class PlantdbApplication {
 
 			// Save couple new plants
 			prepo.save(new Plant("Pilea", "Pilea peperomioides", "Kilpipiilea",
-					wrepo.findByName("Let soil dry almost completely").get(0), lrepo.findByName("Partial Shade").get(0),
+					wrepo.findByName("Let soil dry almost completely").get(0), 
+					lrepo.findByName("Partial Shade").get(0),
 					frepo.findByName("Couple times a month").get(0), "2018-12-12"));
 
 			prepo.save(new Plant("Elephant Ear Plant", "Alocasia", "Juurakkovehka",
-					wrepo.findByName("Do not let dry out").get(0), lrepo.findByName("Filtered sun").get(0),
+					wrepo.findByName("Do not let dry out").get(0), 
+					lrepo.findByName("Filtered sun").get(0),
 					frepo.findByName("Weekly").get(0), "2018-12-12"));
 
 			// Create users: admin/admin user/user
-			User user1 = new User("user", "$2a$04$19ycEAQTqV66Cg4bZt9oR.xTEzfEaEXLrr/dSsOBVIjNr/ep3wtEm", "USER");
-			User user2 = new User("admin", "$2a$04$txKbHel.N18yPJDEufmO..KFpUHaCa9AY7Am.fQdTou8uE8qZgOU6", "ADMIN");
+			User user1 = new User("user", "$2a$10$yPNvrMidBDJfKcLSwE3pFe1psXbwz2B36L16iP3p5XqY.s4WQq5wK", "USER");
+			User user2 = new User("admin", "$2a$10$oVsKG/JjIyuSejF23XyTEuF4mx90fGXGyOg.o7TTUY/IyXlNakdFS", "ADMIN");
 			urepo.save(user1);
 			urepo.save(user2);
 

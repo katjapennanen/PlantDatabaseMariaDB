@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.spproject.plantdb.domain.FertilizerType;
 import com.spproject.plantdb.domain.FertilizerTypeRepository;
 import com.spproject.plantdb.domain.LightType;
@@ -28,7 +31,7 @@ public class PlantController {
 	@Autowired
 	private FertilizerTypeRepository frepo;
 
-	// Login page listener
+	// Login page
 	@RequestMapping(value = "/login")
 	public String login() {
 		return "login";
@@ -38,6 +41,18 @@ public class PlantController {
 	@RequestMapping("/home")
 	public String home(Model model) {
 		model.addAttribute("plants", prepo.findAll());
+		return "home";
+	}
+
+	// Search plants
+	@GetMapping("/search")
+	public String search(@RequestParam(name = "searchterm") String searchterm, Model model) {
+		String term1 = searchterm;
+		String term2 = searchterm;
+		String term3 = searchterm;
+		model.addAttribute("plants",
+				prepo.findByEngNameIgnoreCaseContainingOrLatNameIgnoreCaseContainingOrFinNameIgnoreCaseContaining(
+				term1, term2, term3));
 		return "home";
 	}
 

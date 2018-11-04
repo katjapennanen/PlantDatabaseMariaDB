@@ -6,4 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface WaterTypeRepository extends CrudRepository<WaterType, Long> {
 	List<WaterType> findByName(String name);
+	
+	List<WaterType> findAllByOrderByNameDesc();
 }
