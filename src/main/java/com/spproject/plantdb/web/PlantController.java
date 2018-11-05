@@ -109,55 +109,66 @@ public class PlantController {
 		model.addAttribute("wtypes", wrepo.findAll());
 		model.addAttribute("ltypes", lrepo.findAll());
 		model.addAttribute("ftypes", frepo.findAll());
+		model.addAttribute("wtype", new WaterType());
+		model.addAttribute("ltype", new LightType());
+		model.addAttribute("ftype", new FertilizerType());
 		return "types";
 	}
 
 	// Edit types
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@RequestMapping(value = "/edittypes/{id}")
-	public String editTypes(@PathVariable("id") Long waterId, @PathVariable("id") Long lightId,
+	@RequestMapping(value = "/types/{id}")
+	public String editTypes(
+			@PathVariable("id") Long waterId, 
+			@PathVariable("id") Long lightId,
 			@PathVariable("id") Long fertilizerId, Model model) {
 		model.addAttribute("wtype", wrepo.findById(waterId));
-		model.addAttribute("wtypes", wrepo.findAll());
 		model.addAttribute("ltype", lrepo.findById(lightId));
-		model.addAttribute("ltypes", lrepo.findAll());
 		model.addAttribute("ftype", frepo.findById(fertilizerId));
+		model.addAttribute("wtypes", wrepo.findAll());
+		model.addAttribute("ltypes", lrepo.findAll());
 		model.addAttribute("ftypes", frepo.findAll());
-		return "edittypes";
+		return "types";
 	}
 
-	// Add new type
-	@PreAuthorize("hasAuthority('ADMIN')")
-	@RequestMapping(value = "/addtypes")
-	public String addType(Model model) {
-		model.addAttribute("wtype", new WaterType());
-		model.addAttribute("ltype", new LightType());
-		model.addAttribute("ftype", new FertilizerType());
-		return "addtypes";
-	}
-
-	// Save a water type
+	// Save a water type (and capitalize the first letter)
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/savewater", method = RequestMethod.POST)
 	public String savetype(WaterType wtype) {
+		String name1 = "";
+		String name2 = "";
+		name1 = wtype.getName();
+		name2 = name1.substring(0, 1).toUpperCase() + name1.substring(1);
+		wtype.setName(name2);
 		wrepo.save(wtype);
-		return "redirect:home";
+		return "redirect:types";
 	}
 
-	// Save a light type
+	// Save a light type (and capitalize the first letter)
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/savelight", method = RequestMethod.POST)
 	public String savetype(LightType ltype) {
+		String name1 = "";
+		String name2 = "";
+		name1 = ltype.getName();
+		name2 = name1.substring(0, 1).toUpperCase() + name1.substring(1);
+		ltype.setName(name2);
 		lrepo.save(ltype);
-		return "redirect:home";
+		return "redirect:types";
 	}
 
-	// Save a fertilizer type
+	// Save a fertilizer type (and capitalize the first letter)
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/savefertilizer", method = RequestMethod.POST)
 	public String savetype(FertilizerType ftype) {
+		
+		String name1 = "";
+		String name2 = "";
+		name1 = ftype.getName();
+		name2 = name1.substring(0, 1).toUpperCase() + name1.substring(1);
+		ftype.setName(name2);
 		frepo.save(ftype);
-		return "redirect:home";
+		return "redirect:types";
 	}
 
 	// Delete a plant
@@ -168,23 +179,21 @@ public class PlantController {
 		return "redirect:../home";
 	}
 
-	// Save a plant
+	// Save a plant (and capitalize the first letter)
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Plant plant) {
-
-		String engName = plant.getEngName();
-		String engName2 = engName.substring(0, 1).toUpperCase() + engName.substring(1);
-		plant.setEngName(engName2);
-
-		String latName = plant.getLatName();
-		String latName2 = latName.substring(0, 1).toUpperCase() + latName.substring(1);
-		plant.setLatName(latName2);
-
-		String finName = plant.getFinName();
-		String finName2 = finName.substring(0, 1).toUpperCase() + finName.substring(1);
-		plant.setFinName(finName2);
-
+		String name1 = "";
+		String name2 = "";
+		name1 = plant.getEngName();
+		name2 = name1.substring(0, 1).toUpperCase() + name1.substring(1);
+		plant.setEngName(name2);
+		name1 = plant.getLatName();
+		name2 = name1.substring(0, 1).toUpperCase() + name1.substring(1);
+		plant.setLatName(name2);
+		name1 = plant.getFinName();
+		name2 = name1.substring(0, 1).toUpperCase() + name1.substring(1);
+		plant.setFinName(name2);
 		prepo.save(plant);
 		return "redirect:home";
 	}

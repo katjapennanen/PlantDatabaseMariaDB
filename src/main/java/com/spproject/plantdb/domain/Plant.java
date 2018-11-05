@@ -17,6 +17,7 @@ public class Plant {
 	private String latName;
 	private String finName;
 	private String repotDate;
+	private String imgUrl;
 
 	@ManyToOne
 	@JoinColumn(name = "waterId")
@@ -64,6 +65,10 @@ public class Plant {
 	public String getRepotDate() {
 		return repotDate;
 	}
+	
+	public String getImgUrl() {
+		return imgUrl;
+	}
 
 	public WaterType getWtype() {
 		return wtype;
@@ -96,7 +101,11 @@ public class Plant {
 	public void setRepotDate(String repotDate) {
 		this.repotDate = repotDate;
 	}
-
+	
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+	
 	public void setWtype(WaterType wtype) {
 		this.wtype = wtype;
 	}

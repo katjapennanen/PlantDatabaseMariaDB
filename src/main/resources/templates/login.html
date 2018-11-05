@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container mx-auto text-center" style="width: 300px;">
-	<h2 class="my-5">Bookstore login</h2>
+	<h2 class="my-5">Plant database login</h2>
 	<div class="mb-4 text-danger" th:if="${param.error}">Invalid username and/or password.</div>
 	<div class="mb-4" th:if="${param.logout}">You have been logged out.</div>
 	<form th:action="@{/login}" method="post">

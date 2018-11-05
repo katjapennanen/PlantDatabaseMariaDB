@@ -25,6 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .authorizeRequests()
           .anyRequest().authenticated()
+          .and().csrf().ignoringAntMatchers("/h2-console/**")
+          .and().headers().frameOptions().disable()
           .and()
       .formLogin()
           .loginPage("/login")

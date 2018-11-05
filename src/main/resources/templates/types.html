@@ -15,6 +15,7 @@
 	</head>
 	<body>
 	<h1>Houseplant Extravaganza</h1>
+	<h4>Edit/Add care types</h4>
 		<table>
 			<thead>
 				<tr>
@@ -25,10 +26,16 @@
 			<tbody>
 				<tr th:each="wtype : ${wtypes}">
 					<td th:text="${wtype.name}"></td>
-					<td><a th:href="@{/edittypes/{id}(id=${wtype.waterId})}">Edit</a></td>
+					<td><a th:href="@{/types/{id}(id=${wtype.waterId})}">Edit</a></td>
 				</tr>
 			</tbody>
 		</table>
+			<form th:object="${wtype}" th:action="@{../savewater}" action="#" method="post">
+				<input type="hidden" th:field="*{waterId}" />
+				<label for="watertype">Watering type: </label>
+				<input type="text" id="watertype" th:field="*{name}" required/>
+				<input type="submit" value="Save">
+			</form>
 		<table>
 			<thead>
 				<tr>
@@ -39,10 +46,16 @@
 			<tbody>
 				<tr th:each="ltype : ${ltypes}">
 					<td th:text="${ltype.name}"></td>
-					<td><a th:href="@{/edittypes/{id}(id=${ltype.lightId})}">Edit</a></td>
+					<td><a th:href="@{/types/{id}(id=${ltype.lightId})}">Edit</a></td>
 				</tr>
 			</tbody>
 		</table>
+			<form th:object="${ltype}" th:action="@{../savelight}" action="#" method="post">
+				<input type="hidden" th:field="*{lightId}" />
+				<label for="lighttype">Light type: </label>
+				<input type="text" id="lighttype" th:field="*{name}" required/>
+				<input type="submit" value="Save">
+			</form>
 		<table>
 			<thead>
 				<tr>
@@ -53,9 +66,15 @@
 			<tbody>
 				<tr th:each="ftype : ${ftypes}">
 					<td th:text="${ftype.name}"></td>
-					<td><a th:href="@{/edittypes/{id}(id=${ftype.fertilizerId})}">Edit</a></td>
+					<td><a th:href="@{/types/{id}(id=${ftype.fertilizerId})}">Edit</a></td>
 				</tr>
 			</tbody>
 		</table>
+			<form th:object="${ftype}" th:action="@{../savefertilizer}" action="#" method="post">
+				<input type="hidden" th:field="*{fertilizerId}"  />
+				<label for="fertilizertype">Fertilizer type: </label>
+				<input type="text" id="fertilizertype" th:field="*{name}" required/>
+				<input type="submit" value="Save">
+			</form>
 	</body>
 </html>
