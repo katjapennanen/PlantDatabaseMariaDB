@@ -3,6 +3,7 @@ package com.spproject.plantdb.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class WaterType {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long waterId;
+	@Column(length = 50)
 	private String name;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "wtype")
 	private List<Plant> plants;

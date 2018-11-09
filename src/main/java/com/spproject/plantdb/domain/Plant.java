@@ -1,5 +1,6 @@
 package com.spproject.plantdb.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +14,15 @@ public class Plant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long plantId;
+	@Column(length = 50)
 	private String engName;
+	@Column(length = 50)
 	private String latName;
+	@Column(length = 50)
 	private String finName;
+	@Column(length = 12)
 	private String repotDate;
+	private String note;
 	private String imgUrl;
 
 	@ManyToOne
@@ -35,7 +41,7 @@ public class Plant {
 	}
 
 	public Plant(String engName, String latName, String finName, WaterType wtype, LightType ltype, FertilizerType ftype,
-			String repotDate) {
+			String repotDate, String note) {
 		super();
 		this.engName = engName;
 		this.latName = latName;
@@ -44,6 +50,7 @@ public class Plant {
 		this.ltype = ltype;
 		this.ftype = ftype;
 		this.repotDate = repotDate;
+		this.note = note;
 	}
 
 	public Long getPlantId() {
@@ -65,7 +72,11 @@ public class Plant {
 	public String getRepotDate() {
 		return repotDate;
 	}
-	
+
+	public String getNote() {
+		return note;
+	}
+
 	public String getImgUrl() {
 		return imgUrl;
 	}
@@ -101,11 +112,15 @@ public class Plant {
 	public void setRepotDate(String repotDate) {
 		this.repotDate = repotDate;
 	}
-	
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-	
+
 	public void setWtype(WaterType wtype) {
 		this.wtype = wtype;
 	}

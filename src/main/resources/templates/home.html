@@ -38,6 +38,7 @@
 					<th>Light</th>
 					<th>Fertilizer</th>
 					<th>Repotted last</th>
+					<th>Notes or specifications</th>
 					<th sec:authorize="hasAuthority('ADMIN')"></th>
 					<th sec:authorize="hasAuthority('ADMIN')"></th>
 				</tr>
@@ -51,6 +52,7 @@
 					<td th:text="${plant.ltype.name}"></td>
 					<td th:text="${plant.ftype.name}"></td>
 					<td th:text="${plant.repotDate}"></td>
+					<td th:text="${plant.note}"></td>
 					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${plant.plantId})}">Edit</a></td>
 					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${plant.plantId})}">Delete</a></td>
 				</tr>
