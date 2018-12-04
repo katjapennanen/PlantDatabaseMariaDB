@@ -63,7 +63,7 @@ public class PlantdbApplication {
 					lrepo.findByName("Partial shade/Specling of sun").get(0),
 					frepo.findByName("Weekly").get(0), "2018-12-12", "Leaves burn easily in direct sun"));
 			
-			prepo.save(new Plant("Swiss cheese plant, Monstera 'Monkey mask'", "Monstera Obliqua", "Menninkäisenlehti",
+			prepo.save(new Plant("Swiss cheese plant, Monstera 'Monkey mask'", "Monstera Adansonii", "Menninkäisenlehti",
 					wrepo.findByName("Let top (~2cm) of the soil dry").get(0), 
 					lrepo.findByName("Partial shade to full shade").get(0),
 					frepo.findByName("(Max) once a month").get(0), "2018-12-12", ""));
@@ -98,7 +98,6 @@ public class PlantdbApplication {
 			for (Plant plant : prepo.findAll()) {
 				log.info(plant.toString());
 			}
-
 		};
 	}
 }

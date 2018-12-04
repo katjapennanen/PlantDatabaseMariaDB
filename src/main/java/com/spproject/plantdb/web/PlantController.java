@@ -44,6 +44,18 @@ public class PlantController {
 		return "home";
 	}
 
+	// Cancel action
+	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
+	public String cancel() {
+		return "redirect:home";
+	}
+
+	// Cancel type edit
+	@RequestMapping(value = "/canceledit", method = RequestMethod.GET)
+	public String cancelEdit() {
+		return "redirect:types";
+	}
+
 	// Sort by English name
 	@RequestMapping(value = "/sorteng")
 	public String sorteng(Model model) {
@@ -118,9 +130,7 @@ public class PlantController {
 	// Edit types
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/types/{id}")
-	public String editTypes(
-			@PathVariable("id") Long waterId, 
-			@PathVariable("id") Long lightId,
+	public String editTypes(@PathVariable("id") Long waterId, @PathVariable("id") Long lightId,
 			@PathVariable("id") Long fertilizerId, Model model) {
 		model.addAttribute("wtype", wrepo.findById(waterId));
 		model.addAttribute("ltype", lrepo.findById(lightId));
@@ -161,7 +171,7 @@ public class PlantController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/savefertilizer", method = RequestMethod.POST)
 	public String savetype(FertilizerType ftype) {
-		
+
 		String name1 = "";
 		String name2 = "";
 		name1 = ftype.getName();
