@@ -1,0 +1,15 @@
+
+.jumbotron {
+    border-radius: 0;
+    background-image: url("plantheader.jpg");
+    background-size: cover;
+    height: 210px;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+.contentBg {
+    background-color: rgb(235, 233, 240);
+}

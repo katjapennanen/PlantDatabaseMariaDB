@@ -1,121 +1,144 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-	<head>
-		<title>Types</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-      		crossorigin="anonymous"/>
-	</head>
-	<body>
-		<div class="container">
-			<form th:action="@{/logout}" method="post" style="float: right" class="mt-3">
-				<div class="form-row align-items-center">
-				  <div class="col-auto">
-					<h3 th:inline="text">Welcome, [[${#httpServletRequest.remoteUser}]]</h3>
-				  </div>
-				  <div class="col-auto">
-					<button type="submit" class="btn btn-primary ml-3">Sign out</button>
-				  </div>
-				</div>
-			</form>
-			<h1 class="my-5 display-4">Edit/Add care types</h1>
-			<a class="btn btn-info mt-2" href="/cancel">Back to plants</a>
-			<div class="row">
-				<div class="col-sm-4">
-					<table class="table table-sm table-responsive-lg table-bordered table-hover my-4">
-						<thead class="thead table-info">
-							<tr>
-								<th>Watering type</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="wtype : ${wtypes}">
-								<td th:text="${wtype.name}"></td>
-								<td class="text-center"><a th:href="@{/types/{id}(id=${wtype.waterId})}">Edit</a></td>
-							</tr>
-						</tbody>
-					</table>
-					<form th:object="${wtype}" th:action="@{../savewater}" action="#" method="post">
-						<div class="form-group">
-							<input type="hidden" th:field="*{waterId}" />
-							<label for="watertype">Watering type: </label>
-							<input type="text" class="form-control" id="watertype" th:field="*{name}" required/>	
+<head>
+	<title>Types</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+		crossorigin="anonymous"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" 
+		integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" 
+		crossorigin="anonymous">
+	<link type="text/css" rel="stylesheet" href="css/mystyles.css" th:href="@{../css/mystyles.css}" />
+</head>
+<body>
+	<div class="jumbotron mb-0 mx-auto w-75"></div>
+	<div class="contentBg m-auto w-75">
+		<nav class="navbar navbar-expand-lg navbar-light bg-info">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="/home">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/addplant">Add a new plant</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/types">Add/Edit types</a>
+				</li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0" th:action="@{/search}" th:object="${plants}" method="get">
+					<input class="form-control mr-sm-2" type="search" placeholder="Search plant by attribute" name="searchterm" th:value="${searchterm}" aria-label="Search">
+					<button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+		<div class="m-4 pb-3">
+		<form th:action="@{/logout}" method="post" class="my-2 float-right form-inline">
+			<p th:inline="text" class="font-weight-light my-2">You are signed in as <p class="font-weight-bold m-2">[[${#httpServletRequest.remoteUser}]]</p></p>
+			<button type="submit" class="btn btn-info btn-sm">Sign out</button>
+		</form>
+		<h1 class="mb-5 display-4">Edit/Add care types</h1>
+		<div class="row">
+			<div class="col-sm-5">
+				<table class="table table-sm table-responsive-lg table-light table-bordered table-hover mb-4">
+					<thead class="thead table-info">
+						<tr>
+							<th>Watering type</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="wtype : ${wtypes}">
+							<td th:text="${wtype.name}"></td>
+							<td class="text-center"><a th:href="@{/types/{id}(id=${wtype.waterId})}" class="text-info"><i class="fas fa-edit"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+				<form th:object="${wtype}" th:action="@{../savewater}" action="#" method="post">
+					<div class="form-group">
+						<input type="hidden" th:field="*{waterId}" />
+						<label for="watertype">Watering type: </label>
+						<input type="text" class="form-control" id="watertype" th:field="*{name}" required/>	
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-auto">
+							<input type="submit" class="btn btn-info mb-0" value="Save watering">
 						</div>
-						<div class="form-row">
-							<div class="form-group col-md-auto">
-								<input type="submit" class="btn btn-info mb-0" value="Save watering">
-							</div>
-							<div class="form-group col-md-auto">
-								<a class="btn btn-secondary" href="/canceledit">Cancel edit</a>
-							</div>
+						<div class="form-group col-md-auto">
+							<a class="btn btn-secondary" href="/canceledit">Cancel edit</a>
 						</div>
-					</form>
-				</div>
-				<div class="col-sm-4">
-					<table class="table table-sm table-responsive-lg table-bordered table-hover my-4">
-						<thead class="thead table-info">
-							<tr>
-								<th>Fertilizing type</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="ftype : ${ftypes}">
-								<td th:text="${ftype.name}"></td>
-								<td class="text-center"><a th:href="@{/types/{id}(id=${ftype.fertilizerId})}">Edit</a></td>
-							</tr>
-						</tbody>
-					</table>
-					<form th:object="${ftype}" th:action="@{../savefertilizer}" action="#" method="post">
-						<div class="form-group">
-							<input type="hidden" th:field="*{fertilizerId}"  />
-							<label for="fertilizertype">Fertilizer type: </label>
-							<input type="text" class="form-control" id="fertilizertype" th:field="*{name}" required/>	
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-3">
+				<table class="table table-sm table-responsive-lg table-light table-bordered table-hover mb-4">
+					<thead class="thead table-info">
+						<tr>
+							<th>Fertilizing type</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ftype : ${ftypes}">
+							<td th:text="${ftype.name}"></td>
+							<td class="text-center"><a th:href="@{/types/{id}(id=${ftype.fertilizerId})}" class="text-info"><i class="fas fa-edit"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+				<form th:object="${ftype}" th:action="@{../savefertilizer}" action="#" method="post">
+					<div class="form-group">
+						<input type="hidden" th:field="*{fertilizerId}"  />
+						<label for="fertilizertype">Fertilizer type: </label>
+						<input type="text" class="form-control" id="fertilizertype" th:field="*{name}" required/>	
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-auto">
+							<input type="submit" class="btn btn-info mb-0" value="Save fertilizer">
 						</div>
-						<div class="form-row">
-							<div class="form-group col-md-auto">
-								<input type="submit" class="btn btn-info mb-0" value="Save fertilizer">
-							</div>
-							<div class="form-group col-md-auto">
-								<a class="btn btn-secondary" href="/canceledit">Cancel edit</a>
-							</div>
+						<div class="form-group col-md-auto">
+							<a class="btn btn-secondary" href="/canceledit">Cancel edit</a>
 						</div>
-					</form>
-				</div>
-				<div class="col-sm-4">
-					<table class="table table-sm table-responsive-lg table-bordered table-hover my-4">
-						<thead class="thead table-info">
-							<tr>
-								<th>Light type</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="ltype : ${ltypes}">
-								<td th:text="${ltype.name}"></td>
-								<td class="text-center"><a th:href="@{/types/{id}(id=${ltype.lightId})}">Edit</a></td>
-							</tr>
-						</tbody>
-					</table>
-					<form th:object="${ltype}" th:action="@{../savelight}" action="#" method="post">
-						<div class="form-group">
-							<input type="hidden" th:field="*{lightId}" />
-							<label for="lighttype">Light type: </label>
-							<input type="text" class="form-control" id="lighttype" th:field="*{name}" required/>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-4">
+				<table class="table table-sm table-responsive-lg table-light table-bordered table-hover mb-4">
+					<thead class="thead table-info">
+						<tr>
+							<th>Light type</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ltype : ${ltypes}">
+							<td th:text="${ltype.name}"></td>
+							<td class="text-center"><a th:href="@{/types/{id}(id=${ltype.lightId})}" class="text-info"><i class="fas fa-edit"></i></a></a></td>
+						</tr>
+					</tbody>
+				</table>
+				<form th:object="${ltype}" th:action="@{../savelight}" action="#" method="post">
+					<div class="form-group">
+						<input type="hidden" th:field="*{lightId}" />
+						<label for="lighttype">Light type: </label>
+						<input type="text" class="form-control" id="lighttype" th:field="*{name}" required/>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-auto">
+							<input type="submit" class="btn btn-info mb-0" value="Save lighting">
 						</div>
-						<div class="form-row">
-							<div class="form-group col-md-auto">
-								<input type="submit" class="btn btn-info mb-0" value="Save lighting">
-							</div>
-							<div class="form-group col-md-auto">
-								<a class="btn btn-secondary" href="/canceledit">Cancel edit</a>
-							</div>
+						<div class="form-group col-md-auto">
+							<a class="btn btn-secondary" href="/canceledit">Cancel edit</a>
 						</div>
-					</form>
-				</div>
-				
-		</div>
-	</body>
+					</div>
+				</form>
+			</div>
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
 </html>

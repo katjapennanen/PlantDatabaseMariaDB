@@ -22,6 +22,8 @@ import com.spproject.plantdb.domain.WaterTypeRepository;
 @Controller
 public class PlantController {
 
+	boolean ascOrDesc = true;
+
 	@Autowired
 	private PlantRepository prepo;
 	@Autowired
@@ -59,21 +61,78 @@ public class PlantController {
 	// Sort by English name
 	@RequestMapping(value = "/sorteng")
 	public String sorteng(Model model) {
-		model.addAttribute("plants", prepo.findAllByOrderByEngNameAsc());
+		if (ascOrDesc) {
+			ascOrDesc = false;
+			model.addAttribute("plants", prepo.findAllByOrderByEngNameAsc());
+		} else {
+			ascOrDesc = true;
+			model.addAttribute("plants", prepo.findAllByOrderByEngNameDesc());
+		}
 		return "home";
 	}
 
 	// Sort by Latin name
 	@RequestMapping(value = "/sortlat")
 	public String sortlat(Model model) {
-		model.addAttribute("plants", prepo.findAllByOrderByLatNameAsc());
+		if (ascOrDesc) {
+			ascOrDesc = false;
+			model.addAttribute("plants", prepo.findAllByOrderByLatNameAsc());
+		} else {
+			ascOrDesc = true;
+			model.addAttribute("plants", prepo.findAllByOrderByLatNameDesc());
+		}
 		return "home";
 	}
 
-	// Sort By Finnish name
+	// Sort by Finnish name
 	@RequestMapping(value = "/sortfin")
 	public String sortfin(Model model) {
-		model.addAttribute("plants", prepo.findAllByOrderByFinNameAsc());
+		if (ascOrDesc) {
+			ascOrDesc = false;
+			model.addAttribute("plants", prepo.findAllByOrderByFinNameAsc());
+		} else {
+			ascOrDesc = true;
+			model.addAttribute("plants", prepo.findAllByOrderByFinNameDesc());
+		}
+		return "home";
+	}
+
+	// Sort by water
+	@RequestMapping(value = "/sortwater")
+	public String sortwater(Model model) {
+		if (ascOrDesc) {
+			ascOrDesc = false;
+			model.addAttribute("plants", prepo.findAllByOrderByWtype_NameAsc());
+		} else {
+			ascOrDesc = true;
+			model.addAttribute("plants", prepo.findAllByOrderByWtype_NameDesc());
+		}
+		return "home";
+	}
+
+	// Sort by fertilizer
+	@RequestMapping(value = "/sortfertilizer")
+	public String sortfertilizer(Model model) {
+		if (ascOrDesc) {
+			ascOrDesc = false;
+			model.addAttribute("plants", prepo.findAllByOrderByFtype_NameAsc());
+		} else {
+			ascOrDesc = true;
+			model.addAttribute("plants", prepo.findAllByOrderByFtype_NameDesc());
+		}
+		return "home";
+	}
+
+	// Sort by light
+	@RequestMapping(value = "/sortlight")
+	public String sortlight(Model model) {
+		if (ascOrDesc) {
+			ascOrDesc = false;
+			model.addAttribute("plants", prepo.findAllByOrderByLtype_NameAsc());
+		} else {
+			ascOrDesc = true;
+			model.addAttribute("plants", prepo.findAllByOrderByLtype_NameDesc());
+		}
 		return "home";
 	}
 
@@ -86,13 +145,14 @@ public class PlantController {
 		String term4 = searchterm;
 		String term5 = searchterm;
 		String term6 = searchterm;
+		String term7 = searchterm;
 		model.addAttribute("plants", prepo
-				.findByEngNameIgnoreCaseContainingOrLatNameIgnoreCaseContainingOrFinNameIgnoreCaseContainingOrWtype_NameIgnoreCaseContainingOrLtype_NameIgnoreCaseContainingOrFtype_NameIgnoreCaseContaining(
-						term1, term2, term3, term4, term5, term6));
+				.findByEngNameIgnoreCaseContainingOrLatNameIgnoreCaseContainingOrFinNameIgnoreCaseContainingOrWtype_NameIgnoreCaseContainingOrLtype_NameIgnoreCaseContainingOrFtype_NameIgnoreCaseContainingOrNoteIgnoreCaseContaining(
+						term1, term2, term3, term4, term5, term6, term7));
 		return "home";
 	}
 
-	// Add new plant
+	// Add a new plant
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/addplant")
 	public String addPlant(Model model) {
