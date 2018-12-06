@@ -6,25 +6,25 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PlantRepository extends CrudRepository<Plant, Long> {
 	
-	List<Plant> findAllByOrderByEngNameAsc();
-	List<Plant> findAllByOrderByEngNameDesc();
+	List<Plant> findAllByOrderByEngnameAsc();
+	List<Plant> findAllByOrderByEngnameDesc();
 	
-	List<Plant> findAllByOrderByLatNameAsc();
-	List<Plant> findAllByOrderByLatNameDesc();
+	List<Plant> findAllByOrderByLatnameAsc();
+	List<Plant> findAllByOrderByLatnameDesc();
 	
-	List<Plant> findAllByOrderByFinNameAsc();
-	List<Plant> findAllByOrderByFinNameDesc();
+	List<Plant> findAllByOrderByFinnameAsc();
+	List<Plant> findAllByOrderByFinnameDesc();
 	
-	List<Plant> findAllByOrderByWtype_NameAsc();
-	List<Plant> findAllByOrderByWtype_NameDesc();
+	List<Plant> findAllByOrderByWaterid_NameAsc();
+	List<Plant> findAllByOrderByWaterid_NameDesc();
 	
-	List<Plant> findAllByOrderByFtype_NameAsc();
-	List<Plant> findAllByOrderByFtype_NameDesc();
+	List<Plant> findAllByOrderByFertilizerid_NameAsc();
+	List<Plant> findAllByOrderByFertilizerid_NameDesc();
 	
-	List<Plant> findAllByOrderByLtype_NameAsc();
-	List<Plant> findAllByOrderByLtype_NameDesc();
+	List<Plant> findAllByOrderByLightid_NameAsc();
+	List<Plant> findAllByOrderByLightid_NameDesc();
 	
 	// Monsterous searching query
-	List<Plant> findByEngNameIgnoreCaseContainingOrLatNameIgnoreCaseContainingOrFinNameIgnoreCaseContainingOrWtype_NameIgnoreCaseContainingOrLtype_NameIgnoreCaseContainingOrFtype_NameIgnoreCaseContainingOrNoteIgnoreCaseContaining(
+	List<Plant> findByEngnameIgnoreCaseContainingOrLatnameIgnoreCaseContainingOrFinnameIgnoreCaseContainingOrWaterid_NameIgnoreCaseContainingOrLightid_NameIgnoreCaseContainingOrFertilizerid_NameIgnoreCaseContainingOrNoteIgnoreCaseContaining(
 			String searchterm, String searchterm2, String searchterm3, String searchterm4, String searchterm5, String searchterm6, String searchterm7);
 }

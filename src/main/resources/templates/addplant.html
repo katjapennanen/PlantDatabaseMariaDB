@@ -21,10 +21,10 @@
 				  <a class="nav-link" href="/home">Home</a>
 				</li>
 				<li class="nav-item active">
-				  <a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/addplant">Add a new plant</a>
+				  <a class="nav-link" href="/addplant">Add a new plant</a>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/types">Add/Edit care instructions</a>
+				  <a class="nav-link" href="/types">Add/Edit care instructions</a>
 				</li>
 			  </ul>
 			  <form class="form-inline my-2 my-lg-0" th:action="@{/search}" th:object="${plants}" method="get">
@@ -34,50 +34,46 @@
 			</div>
 		</nav>
 		<div class="m-4 pb-3">
-		  <form th:action="@{/logout}" method="post" class="my-2 float-right form-inline">
-				<p th:inline="text" class="font-weight-light my-2">You are signed in as <p class="font-weight-bold m-2">[[${#httpServletRequest.remoteUser}]]</p></p>
-				<button type="submit" class="btn btn-info btn-sm">Sign out</button>
-			</form>
 		  <h1 class="mb-5 display-4">Add a new plant</h1>
 			<form th:object="${plant}" class="mx-auto" th:action="@{save}" action="#" method="post">
 				<div class="form-row">
 					<div class="form-group col-md-4">
 						<label for="engname">English name</label>
-						<input type="text" class="form-control" id="engname" th:field="*{engName}" required />
+						<input type="text" class="form-control" id="engname" th:field="*{engname}" required />
 					</div>
 					<div class="form-group col-md-4">
 						<label for="latname">Latin name</label>
-						<input type="text" class="form-control" id="latname" th:field="*{latName}" required />
+						<input type="text" class="form-control" id="latname" th:field="*{latname}" required />
 					</div>
 					<div class="form-group col-md-4">
 						<label for="finname">Finnish name</label>
-						<input type="text" class="form-control" id="finname" th:field="*{finName}" required />
+						<input type="text" class="form-control" id="finname" th:field="*{finname}" required />
 					</div>
 				</div>
 			<div class="form-row">
 				<div class="form-group col-md-4">
 					<label for="waterlist">Watering need</label>
-						<select id="waterlist" class="form-control" th:field="*{wtype}">
-							<option th:each="wtype: ${wtypes}" th:value="${wtype.waterId}" th:text="${wtype.name}"></option>
+						<select id="waterlist" class="form-control" th:field="*{waterid}">
+							<option th:each="wtype: ${wtypes}" th:value="${wtype.waterid}" th:text="${wtype.name}"></option>
 						</select>
 				</div>
 				<div class="form-group col-md-4">
 					<label for="lightlist">Light condition</label>
-					<select id="lightlist" class="form-control" th:field="*{ltype}">
-						<option th:each="ltype: ${ltypes}" th:value="${ltype.lightId}" th:text="${ltype.name}"></option>
+					<select id="lightlist" class="form-control" th:field="*{lightid}">
+						<option th:each="ltype: ${ltypes}" th:value="${ltype.lightid}" th:text="${ltype.name}"></option>
 					</select>
 				</div>
 				<div class="form-group col-md-4">
 					<label for="ferlist">Fertilizing frequency</label>
-					<select id="ferlist" class="form-control" th:field="*{ftype}">
-						<option th:each="ftype: ${ftypes}" th:value="${ftype.fertilizerId}" th:text="${ftype.name}"></option>
+					<select id="ferlist" class="form-control" th:field="*{fertilizerid}">
+						<option th:each="ftype: ${ftypes}" th:value="${ftype.fertilizerid}" th:text="${ftype.name}"></option>
 					</select>
 				</div>
 			</div>
 			<div class="form-row">	
 				<div class="form-group col-md-2">
 					<label for="repotdate">Repotted last</label>
-					<input type="date" class="form-control" id="repotdate" th:field="*{repotDate}" required />
+					<input type="date" class="form-control" id="repotdate" th:field="*{repotdate}" required />
 				</div>
 				<div class="form-group col-md-5">
 					<label for="note">Notes or specifications</label>
@@ -85,7 +81,7 @@
 				</div>
 				<div class="form-group col-md-5">
 					<label for="imgUrl">Outside URL</label>
-					  <input type="url" class="form-control" id="imgUrl" th:field="*{imgUrl}"  />
+					  <input type="url" class="form-control" id="imgUrl" th:field="*{imgurl}"  />
 				</div>
 			</div>
 			<div class="form-row">	

@@ -1,5 +1,7 @@
 package com.spproject.plantdb.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,131 +9,142 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Plant {
+@Table(name= "plant")
+public class Plant implements Serializable {
 
+	private static final long serialVersionUID = -3009157732242241606L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long plantId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long plantid;
 	@Column(length = 50)
-	private String engName;
+	private String engname;
 	@Column(length = 50)
-	private String latName;
+	private String latname;
 	@Column(length = 50)
-	private String finName;
+	private String finname;
 	@Column(length = 12)
-	private String repotDate;
+	private String repotdate;
+	@Column
 	private String note;
-	private String imgUrl;
+	@Column
+	private String imgurl;
 
 	@ManyToOne
-	@JoinColumn(name = "waterId")
-	private WaterType wtype;
+	@JoinColumn(name = "waterid")
+	private WaterType waterid;
 
 	@ManyToOne
-	@JoinColumn(name = "lightId")
-	private LightType ltype;
+	@JoinColumn(name = "lightid")
+	private LightType lightid;
 
 	@ManyToOne
-	@JoinColumn(name = "fertilizerId")
-	private FertilizerType ftype;
+	@JoinColumn(name = "fertilizerid")
+	private FertilizerType fertilizerid;
 
 	public Plant() {
 	}
 
 	public Plant(String engName, String latName, String finName, WaterType wtype, LightType ltype, FertilizerType ftype,
 			String repotDate, String note, String imgUrl) {
-		super();
-		this.engName = engName;
-		this.latName = latName;
-		this.finName = finName;
-		this.wtype = wtype;
-		this.ltype = ltype;
-		this.ftype = ftype;
-		this.repotDate = repotDate;
+		this.engname = engName;
+		this.latname = latName;
+		this.finname = finName;
+		this.waterid = wtype;
+		this.lightid = ltype;
+		this.fertilizerid = ftype;
+		this.repotdate = repotDate;
 		this.note = note;
-		this.imgUrl= imgUrl;
+		this.imgurl= imgUrl;
 	}
 
-	public Long getPlantId() {
-		return plantId;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public String getEngName() {
-		return engName;
+	public Long getPlantid() {
+		return plantid;
 	}
 
-	public String getLatName() {
-		return latName;
+	public String getEngname() {
+		return engname;
 	}
 
-	public String getFinName() {
-		return finName;
+	public String getLatname() {
+		return latname;
 	}
 
-	public String getRepotDate() {
-		return repotDate;
+	public String getFinname() {
+		return finname;
+	}
+
+	public String getRepotdate() {
+		return repotdate;
 	}
 
 	public String getNote() {
 		return note;
 	}
 
-	public String getImgUrl() {
-		return imgUrl;
+	public String getImgurl() {
+		return imgurl;
 	}
 
-	public WaterType getWtype() {
-		return wtype;
+	public WaterType getWaterid() {
+		return waterid;
 	}
 
-	public LightType getLtype() {
-		return ltype;
+	public LightType getLightid() {
+		return lightid;
 	}
 
-	public FertilizerType getFtype() {
-		return ftype;
+	public FertilizerType getFertilizerid() {
+		return fertilizerid;
 	}
 
-	public void setPlantId(Long plantId) {
-		this.plantId = plantId;
+	public void setPlantid(Long plantId) {
+		this.plantid = plantId;
 	}
 
-	public void setEngName(String engName) {
-		this.engName = engName;
+	public void setEngname(String engname) {
+		this.engname = engname;
 	}
 
-	public void setLatName(String latName) {
-		this.latName = latName;
+	public void setLatname(String latname) {
+		this.latname = latname;
 	}
 
-	public void setFinName(String finName) {
-		this.finName = finName;
+	public void setFinname(String finname) {
+		this.finname = finname;
 	}
 
-	public void setRepotDate(String repotDate) {
-		this.repotDate = repotDate;
+	public void setRepotdate(String repotdate) {
+		this.repotdate = repotdate;
 	}
 
 	public void setNote(String note) {
 		this.note = note;
 	}
 
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
 	}
 
-	public void setWtype(WaterType wtype) {
-		this.wtype = wtype;
+	public void setWaterid(WaterType waterid) {
+		this.waterid = waterid;
 	}
 
-	public void setLtype(LightType ltype) {
-		this.ltype = ltype;
+	public void setLightid(LightType lightid) {
+		this.lightid = lightid;
 	}
 
-	public void setFtype(FertilizerType ftype) {
-		this.ftype = ftype;
+	public void setFertilizerid(FertilizerType fertilizerid) {
+		this.fertilizerid = fertilizerid;
 	}
 
+	
+
+	
 }

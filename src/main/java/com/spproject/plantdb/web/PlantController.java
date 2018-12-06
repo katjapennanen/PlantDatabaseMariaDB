@@ -1,7 +1,6 @@
 package com.spproject.plantdb.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,11 +32,6 @@ public class PlantController {
 	@Autowired
 	private FertilizerTypeRepository frepo;
 
-	// Login page
-	@RequestMapping(value = "/login")
-	public String login() {
-		return "login";
-	}
 
 	// Show all plants
 	@RequestMapping(value = "/home")
@@ -63,10 +57,10 @@ public class PlantController {
 	public String sorteng(Model model) {
 		if (ascOrDesc) {
 			ascOrDesc = false;
-			model.addAttribute("plants", prepo.findAllByOrderByEngNameAsc());
+			model.addAttribute("plants", prepo.findAllByOrderByEngnameAsc());
 		} else {
 			ascOrDesc = true;
-			model.addAttribute("plants", prepo.findAllByOrderByEngNameDesc());
+			model.addAttribute("plants", prepo.findAllByOrderByEngnameDesc());
 		}
 		return "home";
 	}
@@ -76,10 +70,10 @@ public class PlantController {
 	public String sortlat(Model model) {
 		if (ascOrDesc) {
 			ascOrDesc = false;
-			model.addAttribute("plants", prepo.findAllByOrderByLatNameAsc());
+			model.addAttribute("plants", prepo.findAllByOrderByLatnameAsc());
 		} else {
 			ascOrDesc = true;
-			model.addAttribute("plants", prepo.findAllByOrderByLatNameDesc());
+			model.addAttribute("plants", prepo.findAllByOrderByLatnameDesc());
 		}
 		return "home";
 	}
@@ -89,10 +83,10 @@ public class PlantController {
 	public String sortfin(Model model) {
 		if (ascOrDesc) {
 			ascOrDesc = false;
-			model.addAttribute("plants", prepo.findAllByOrderByFinNameAsc());
+			model.addAttribute("plants", prepo.findAllByOrderByFinnameAsc());
 		} else {
 			ascOrDesc = true;
-			model.addAttribute("plants", prepo.findAllByOrderByFinNameDesc());
+			model.addAttribute("plants", prepo.findAllByOrderByFinnameDesc());
 		}
 		return "home";
 	}
@@ -102,10 +96,10 @@ public class PlantController {
 	public String sortwater(Model model) {
 		if (ascOrDesc) {
 			ascOrDesc = false;
-			model.addAttribute("plants", prepo.findAllByOrderByWtype_NameAsc());
+			model.addAttribute("plants", prepo.findAllByOrderByLightid_NameAsc());
 		} else {
 			ascOrDesc = true;
-			model.addAttribute("plants", prepo.findAllByOrderByWtype_NameDesc());
+			model.addAttribute("plants", prepo.findAllByOrderByWaterid_NameDesc());
 		}
 		return "home";
 	}
@@ -115,10 +109,10 @@ public class PlantController {
 	public String sortfertilizer(Model model) {
 		if (ascOrDesc) {
 			ascOrDesc = false;
-			model.addAttribute("plants", prepo.findAllByOrderByFtype_NameAsc());
+			model.addAttribute("plants", prepo.findAllByOrderByFertilizerid_NameAsc());
 		} else {
 			ascOrDesc = true;
-			model.addAttribute("plants", prepo.findAllByOrderByFtype_NameDesc());
+			model.addAttribute("plants", prepo.findAllByOrderByFertilizerid_NameDesc());
 		}
 		return "home";
 	}
@@ -128,10 +122,10 @@ public class PlantController {
 	public String sortlight(Model model) {
 		if (ascOrDesc) {
 			ascOrDesc = false;
-			model.addAttribute("plants", prepo.findAllByOrderByLtype_NameAsc());
+			model.addAttribute("plants", prepo.findAllByOrderByLightid_NameAsc());
 		} else {
 			ascOrDesc = true;
-			model.addAttribute("plants", prepo.findAllByOrderByLtype_NameDesc());
+			model.addAttribute("plants", prepo.findAllByOrderByLatnameDesc());
 		}
 		return "home";
 	}
@@ -147,13 +141,12 @@ public class PlantController {
 		String term6 = searchterm;
 		String term7 = searchterm;
 		model.addAttribute("plants", prepo
-				.findByEngNameIgnoreCaseContainingOrLatNameIgnoreCaseContainingOrFinNameIgnoreCaseContainingOrWtype_NameIgnoreCaseContainingOrLtype_NameIgnoreCaseContainingOrFtype_NameIgnoreCaseContainingOrNoteIgnoreCaseContaining(
+				.findByEngnameIgnoreCaseContainingOrLatnameIgnoreCaseContainingOrFinnameIgnoreCaseContainingOrWaterid_NameIgnoreCaseContainingOrLightid_NameIgnoreCaseContainingOrFertilizerid_NameIgnoreCaseContainingOrNoteIgnoreCaseContaining(
 						term1, term2, term3, term4, term5, term6, term7));
 		return "home";
 	}
 
 	// Add a new plant
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/addplant")
 	public String addPlant(Model model) {
 		model.addAttribute("plant", new Plant());
@@ -164,7 +157,6 @@ public class PlantController {
 	}
 
 	// Edit a plant
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/edit/{id}")
 	public String editPlant(@PathVariable("id") Long plantId, Model model) {
 		model.addAttribute("plant", prepo.findById(plantId));
@@ -175,7 +167,6 @@ public class PlantController {
 	}
 
 	// Show all types
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/types")
 	public String types(Model model) {
 		model.addAttribute("wtypes", wrepo.findAll());
@@ -188,7 +179,6 @@ public class PlantController {
 	}
 
 	// Edit types
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/types/{id}")
 	public String editTypes(@PathVariable("id") Long waterId, @PathVariable("id") Long lightId,
 			@PathVariable("id") Long fertilizerId, Model model) {
@@ -202,7 +192,6 @@ public class PlantController {
 	}
 
 	// Save a water type (and capitalize the first letter)
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/savewater", method = RequestMethod.POST)
 	public String savetype(WaterType wtype) {
 		String name1 = "";
@@ -215,7 +204,6 @@ public class PlantController {
 	}
 
 	// Save a light type (and capitalize the first letter)
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/savelight", method = RequestMethod.POST)
 	public String savetype(LightType ltype) {
 		String name1 = "";
@@ -228,7 +216,6 @@ public class PlantController {
 	}
 
 	// Save a fertilizer type (and capitalize the first letter)
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/savefertilizer", method = RequestMethod.POST)
 	public String savetype(FertilizerType ftype) {
 
@@ -242,7 +229,6 @@ public class PlantController {
 	}
 
 	// Delete a plant
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deletePlant(@PathVariable("id") Long plantId, Model model) {
 		prepo.deleteById(plantId);
@@ -250,20 +236,19 @@ public class PlantController {
 	}
 
 	// Save a plant (and capitalize the first letter)
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Plant plant) {
 		String name1 = "";
 		String name2 = "";
-		name1 = plant.getEngName();
+		name1 = plant.getEngname();
 		name2 = name1.substring(0, 1).toUpperCase() + name1.substring(1);
-		plant.setEngName(name2);
-		name1 = plant.getLatName();
+		plant.setEngname(name2);
+		name1 = plant.getLatname();
 		name2 = name1.substring(0, 1).toUpperCase() + name1.substring(1);
-		plant.setLatName(name2);
-		name1 = plant.getFinName();
+		plant.setLatname(name2);
+		name1 = plant.getFinname();
 		name2 = name1.substring(0, 1).toUpperCase() + name1.substring(1);
-		plant.setFinName(name2);
+		plant.setFinname(name2);
 		prepo.save(plant);
 		return "redirect:home";
 	}

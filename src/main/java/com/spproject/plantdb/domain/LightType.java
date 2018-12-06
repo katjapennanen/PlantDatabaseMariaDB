@@ -1,5 +1,6 @@
 package com.spproject.plantdb.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,17 +10,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
-public class LightType {
+@Table(name= "light_type")
+public class LightType  implements Serializable {
 
+	private static final long serialVersionUID = -3009157732242241606L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long lightId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long lightid;
 	@Column(length = 50)
 	private String name;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ltype")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "lightid")
 	private List<Plant> plants;
 	
 	public LightType() {}
@@ -28,8 +32,12 @@ public class LightType {
 		this.name = name;
 	}
 
-	public Long getLightId() {
-		return lightId;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Long getLightid() {
+		return lightid;
 	}
 
 	public String getName() {
@@ -40,8 +48,8 @@ public class LightType {
 		return plants;
 	}
 
-	public void setLightId(Long lightId) {
-		this.lightId = lightId;
+	public void setLightid(Long lightid) {
+		this.lightid = lightid;
 	}
 
 	public void setName(String name) {
@@ -51,5 +59,4 @@ public class LightType {
 	public void setPlants(List<Plant> plants) {
 		this.plants = plants;
 	}
-	
 }

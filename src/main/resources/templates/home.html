@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+  xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Plant manager</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -27,10 +26,10 @@
             <a class="nav-link" href="/home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/addplant">Add a new plant</a>
+            <a class="nav-link" href="/addplant">Add a new plant</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/types">Add/Edit care instructions</a>
+            <a class="nav-link" href="/types">Add/Edit care instructions</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" th:action="@{/search}" th:object="${plants}" method="get">
@@ -40,10 +39,6 @@
       </div>
   </nav>
   <div class="m-4 pb-3">
-    <form th:action="@{/logout}" method="post" class="my-2 float-right form-inline">
-			<p th:inline="text" class="font-weight-light my-2">You are signed in as <p class="font-weight-bold m-2">[[${#httpServletRequest.remoteUser}]]</p></p>
-			<button type="submit" class="btn btn-info btn-sm">Sign out</button>
-		</form>
     <h1 class="mb-5 display-4">Houseplant Extravaganza</h1>
     <table class="table table-sm table-light table-responsive-xl table-bordered table-hover mb-4">
       <thead class="thead table-info">
@@ -56,26 +51,26 @@
           <th class="p-2 text-center" style="min-width: 150px">Fertilizer<a href="/sortfertilizer" class="text-info btn-sm mx-2"><i class="fas fa-sort"></i></a></th>
           <th class="p-2 text-center">Repotted</th>
           <th class="p-2 text-center">Misc</th>
-			    <th class="p-2 text-center">Link</th>
-          <th sec:authorize="hasAuthority('ADMIN')"></th>
+			<th class="p-2 text-center">Link</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr th:each="plant : ${plants}">
-          <td class="pl-2" th:text="${plant.engName}"></td>
-          <td class="pl-2" th:text="${plant.latName}"></td>
-          <td class="pl-2" th:text="${plant.finName}"></td>
-          <td class="pl-2" th:text="${plant.wtype.name}"></td>
-          <td class="pl-2" th:text="${plant.ltype.name}"></td>
-          <td class="pl-2" th:text="${plant.ftype.name}"></td>
-          <td class="pl-2" th:text="${plant.repotDate}"></td>
+          <td class="pl-2" th:text="${plant.engname}"></td>
+          <td class="pl-2" th:text="${plant.latname}"></td>
+          <td class="pl-2" th:text="${plant.finname}"></td>
+          <td class="pl-2" th:text="${plant.waterid.name}"></td>
+          <td class="pl-2" th:text="${plant.lightid.name}"></td>
+          <td class="pl-2" th:text="${plant.fertilizerid.name}"></td>
+          <td class="pl-2" th:text="${plant.repotdate}"></td>
           <td class="pl-2" th:text="${plant.note}"></td>
 			    <td class="pl-2">
-            <a th:href="${plant.imgUrl}" target="_blank" class="btn btn-info btn-sm mt-1"><i class="fas fa-link"></i></a>
+            <a th:href="${plant.imgurl}" target="_blank" class="btn btn-info btn-sm mt-1"><i class="fas fa-link"></i></a>
           </td>
-          <td class="p-2 text-center" style="min-width: 90px" sec:authorize="hasAuthority('ADMIN')">
-            <a th:href="@{/edit/{id}(id=${plant.plantId})}" class="btn float-left btn-info btn-sm"><i class="fas fa-edit"></i></a>
-		      	<a th:href="@{/delete/{id}(id=${plant.plantId})}" class="btn float-right btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+          <td class="p-2 text-center" style="min-width: 90px">
+            <a th:href="@{/edit/{id}(id=${plant.plantid})}" class="btn float-left btn-info btn-sm"><i class="fas fa-edit"></i></a>
+		      	<a th:href="@{/delete/{id}(id=${plant.plantid})}" class="btn float-right btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
       </tbody>

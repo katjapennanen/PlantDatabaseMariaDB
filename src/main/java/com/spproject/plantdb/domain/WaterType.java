@@ -1,5 +1,6 @@
 package com.spproject.plantdb.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,16 +10,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class WaterType {
+@Table(name= "water_type")
+public class WaterType implements Serializable {
 
+	private static final long serialVersionUID = -3009157732242241606L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long waterId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long waterid;
 	@Column(length = 50)
 	private String name;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "wtype")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "waterid")
 	private List<Plant> plants;
 	
 	public WaterType() {}
@@ -27,8 +31,12 @@ public class WaterType {
 		this.name = name;
 	}
 
-	public Long getWaterId() {
-		return waterId;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Long getWaterid() {
+		return waterid;
 	}
 
 	public String getName() {
@@ -39,8 +47,8 @@ public class WaterType {
 		return plants;
 	}
 
-	public void setWaterId(Long waterId) {
-		this.waterId = waterId;
+	public void setWaterid(Long waterid) {
+		this.waterid = waterid;
 	}
 
 	public void setName(String name) {
@@ -50,5 +58,4 @@ public class WaterType {
 	public void setPlants(List<Plant> plants) {
 		this.plants = plants;
 	}
-
 }

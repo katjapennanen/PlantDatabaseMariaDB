@@ -26,70 +26,70 @@ public class PlantRepositoryTest {
 
 	@Test
 	public void findAllByEngNameShouldReturnTrue() {
-		List<Plant> plantsAsc = prepo.findAllByOrderByEngNameAsc();
-		List<Plant> plantsDesc = prepo.findAllByOrderByEngNameDesc();
+		List<Plant> plantsAsc = prepo.findAllByOrderByEngnameAsc();
+		List<Plant> plantsDesc = prepo.findAllByOrderByEngnameDesc();
 
 		assertThat(plantsAsc).isNotNull();
 		assertThat(plantsDesc).isNotNull();
 		// Making sure the sorting works, the first and the last English names should match
-		assertThat(plantsDesc.get(0).getEngName()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getEngName());
+		assertThat(plantsDesc.get(0).getEngname()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getEngname());
 	}
 
 	@Test
 	public void findAllByLatNameShouldReturnTrue() {
-		List<Plant> plantsAsc = prepo.findAllByOrderByLatNameAsc();
-		List<Plant> plantsDesc = prepo.findAllByOrderByLatNameDesc();
+		List<Plant> plantsAsc = prepo.findAllByOrderByLatnameAsc();
+		List<Plant> plantsDesc = prepo.findAllByOrderByLatnameDesc();
 		assertThat(plantsAsc).isNotNull();
 		assertThat(plantsDesc).isNotNull();
-		assertThat(plantsDesc.get(0).getLatName()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getLatName());
+		assertThat(plantsDesc.get(0).getLatname()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getLatname());
 	}
 
 	@Test
 	public void findAllByFinNameShouldReturnTrue() {
-		List<Plant> plantsAsc = prepo.findAllByOrderByFinNameAsc();
-		List<Plant> plantsDesc = prepo.findAllByOrderByFinNameDesc();
+		List<Plant> plantsAsc = prepo.findAllByOrderByFinnameAsc();
+		List<Plant> plantsDesc = prepo.findAllByOrderByFinnameDesc();
 		assertThat(plantsAsc).isNotNull();
 		assertThat(plantsDesc).isNotNull();
-		assertThat(plantsDesc.get(0).getFinName()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getFinName());
+		assertThat(plantsDesc.get(0).getFinname()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getFinname());
 	}
 
 	@Test
 	public void findAllByWtypeNameShouldReturnTrue() {
-		List<Plant> plantsAsc = prepo.findAllByOrderByWtype_NameAsc();
-		List<Plant> plantsDesc = prepo.findAllByOrderByWtype_NameDesc();
+		List<Plant> plantsAsc = prepo.findAllByOrderByWaterid_NameAsc();
+		List<Plant> plantsDesc = prepo.findAllByOrderByWaterid_NameDesc();
 		assertThat(plantsAsc).isNotNull();
 		assertThat(plantsDesc).isNotNull();
-		assertThat(plantsDesc.get(0).getWtype()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getWtype());
+		assertThat(plantsDesc.get(0).getWaterid()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getWaterid());
 	}
 
 	@Test
 	public void findAllByFtypeNameShouldReturnTrue() {
-		List<Plant> plantsAsc = prepo.findAllByOrderByFtype_NameAsc();
-		List<Plant> plantsDesc = prepo.findAllByOrderByFtype_NameDesc();
+		List<Plant> plantsAsc = prepo.findAllByOrderByFertilizerid_NameAsc();
+		List<Plant> plantsDesc = prepo.findAllByOrderByFertilizerid_NameDesc();
 		assertThat(plantsAsc).isNotNull();
 		assertThat(plantsDesc).isNotNull();
-		assertThat(plantsDesc.get(0).getFtype()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getFtype());
+		assertThat(plantsDesc.get(0).getFertilizerid()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getFertilizerid());
 	}
 
 	@Test
 	public void findAllByLtypeNameShouldReturnTrue() {
-		List<Plant> plantsAsc = prepo.findAllByOrderByLtype_NameAsc();
-		List<Plant> plantsDesc = prepo.findAllByOrderByLtype_NameDesc();
+		List<Plant> plantsAsc = prepo.findAllByOrderByLightid_NameAsc();
+		List<Plant> plantsDesc = prepo.findAllByOrderByLightid_NameDesc();
 		assertThat(plantsAsc).isNotNull();
 		assertThat(plantsDesc).isNotNull();
-		assertThat(plantsDesc.get(0).getLtype()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getLtype());
+		assertThat(plantsDesc.get(0).getLightid()).isEqualTo(plantsAsc.get(plantsAsc.size() - 1).getLightid());
 	}
 
 	@Test
 	public void findAllBySearcthermShouldReturnTrue() {
 		List<Plant> shouldMatch = prepo
-				.findByEngNameIgnoreCaseContainingOrLatNameIgnoreCaseContainingOrFinNameIgnoreCaseContainingOrWtype_NameIgnoreCaseContainingOrLtype_NameIgnoreCaseContainingOrFtype_NameIgnoreCaseContainingOrNoteIgnoreCaseContaining(
+				.findByEngnameIgnoreCaseContainingOrLatnameIgnoreCaseContainingOrFinnameIgnoreCaseContainingOrWaterid_NameIgnoreCaseContainingOrLightid_NameIgnoreCaseContainingOrFertilizerid_NameIgnoreCaseContainingOrNoteIgnoreCaseContaining(
 						"maCULata", "maCULata", "maCULata", "maCULata", "maCULata", "maCULata", "maCULata");
 		List<Plant> shouldNotMatch = prepo
-				.findByEngNameIgnoreCaseContainingOrLatNameIgnoreCaseContainingOrFinNameIgnoreCaseContainingOrWtype_NameIgnoreCaseContainingOrLtype_NameIgnoreCaseContainingOrFtype_NameIgnoreCaseContainingOrNoteIgnoreCaseContaining(
+				.findByEngnameIgnoreCaseContainingOrLatnameIgnoreCaseContainingOrFinnameIgnoreCaseContainingOrWaterid_NameIgnoreCaseContainingOrLightid_NameIgnoreCaseContainingOrFertilizerid_NameIgnoreCaseContainingOrNoteIgnoreCaseContaining(
 						"asdf", "asdf", "asdf", "asdf", "asdf", "asdf", "asdf");
 		List<Plant> shouldMatchMoreThanOne = prepo
-				.findByEngNameIgnoreCaseContainingOrLatNameIgnoreCaseContainingOrFinNameIgnoreCaseContainingOrWtype_NameIgnoreCaseContainingOrLtype_NameIgnoreCaseContainingOrFtype_NameIgnoreCaseContainingOrNoteIgnoreCaseContaining(
+				.findByEngnameIgnoreCaseContainingOrLatnameIgnoreCaseContainingOrFinnameIgnoreCaseContainingOrWaterid_NameIgnoreCaseContainingOrLightid_NameIgnoreCaseContainingOrFertilizerid_NameIgnoreCaseContainingOrNoteIgnoreCaseContaining(
 						"elephant", "elephant", "elephant", "elephant", "elephant", "elephant", "elephant");
 		assertTrue(shouldMatchMoreThanOne.size() == 2);
 		assertThat(shouldMatch.get(0)).isNotNull();
@@ -101,6 +101,6 @@ public class PlantRepositoryTest {
 		Plant plant = new Plant("English name", "Latin name", "Finnish name", new WaterType("Water"), new LightType("Light"),
 				new FertilizerType("Fertilizer"), "2018-12-12", "Notes", "URL");
 		prepo.save(plant);
-		assertThat(plant.getPlantId()).isNotNull();
+		assertThat(plant.getPlantid()).isNotNull();
 	}
 }

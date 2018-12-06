@@ -1,5 +1,6 @@
 package com.spproject.plantdb.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,17 +10,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class FertilizerType {
+@Table(name= "fertilizer_type")
+public class FertilizerType implements Serializable {
 	
+	private static final long serialVersionUID = -3009157732242241606L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long fertilizerId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long fertilizerid;
 	@Column(length = 50)
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ftype")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "fertilizerid")
 	private List<Plant> plants;
 	
 	public FertilizerType() {}
@@ -28,8 +32,12 @@ public class FertilizerType {
 		this.name = name;
 	}
 
-	public Long getFertilizerId() {
-		return fertilizerId;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Long getFertilizerid() {
+		return fertilizerid;
 	}
 
 	public String getName() {
@@ -40,8 +48,8 @@ public class FertilizerType {
 		return plants;
 	}
 
-	public void setFertilizerId(Long fertilizerId) {
-		this.fertilizerId = fertilizerId;
+	public void setFertilizerid(Long fertilizerid) {
+		this.fertilizerid = fertilizerid;
 	}
 
 	public void setName(String name) {
@@ -51,5 +59,4 @@ public class FertilizerType {
 	public void setPlants(List<Plant> plants) {
 		this.plants = plants;
 	}
-
 }
