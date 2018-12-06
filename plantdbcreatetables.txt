@@ -1,0 +1,34 @@
+CREATE TABLE IF NOT EXISTS water_type(
+	waterid INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(50) DEFAULT NULL,
+	PRIMARY KEY(waterid)
+);
+
+CREATE TABLE IF NOT EXISTS light_type(
+	lightid INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(50) DEFAULT NULL,
+	PRIMARY KEY(lightid)
+);
+
+CREATE TABLE IF NOT EXISTS fertilizer_type(
+	fertilizerid INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(50) DEFAULT NULL,
+	PRIMARY KEY(fertilizerid)
+);
+
+CREATE TABLE IF NOT EXISTS plant(
+	plantid INT NOT NULL AUTO_INCREMENT,
+	engname VARCHAR(50) DEFAULT NULL,
+	latname VARCHAR(50) DEFAULT NULL,
+	finname VARCHAR(50) DEFAULT NULL,
+	waterid INT NOT NULL,
+	lightid INT NOT NULL,
+	fertilizerid INT NOT NULL,
+	repotdate DATE DEFAULT NULL,
+	note VARCHAR(50) DEFAULT NULL,
+	imgurl VARCHAR(200) DEFAULT NULL,
+	PRIMARY KEY(plantid),
+	FOREIGN KEY(waterid ) REFERENCES water_type(waterid),
+	FOREIGN KEY(lightid) REFERENCES light_type(lightid),
+	FOREIGN KEY(fertilizerid ) REFERENCES fertilizer_type(fertilizerid)
+);
