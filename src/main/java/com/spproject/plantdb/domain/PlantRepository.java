@@ -7,11 +7,12 @@ import org.springframework.data.repository.CrudRepository;
 public interface PlantRepository extends CrudRepository<Plant, Long> {
 	
 	List<Plant> findAllByOrderByEngNameAsc();
-	List<Plant> findAllByOrderByLatNameAsc();
-	List<Plant> findAllByOrderByFinNameAsc();
-	
 	List<Plant> findAllByOrderByEngNameDesc();
+	
+	List<Plant> findAllByOrderByLatNameAsc();
 	List<Plant> findAllByOrderByLatNameDesc();
+	
+	List<Plant> findAllByOrderByFinNameAsc();
 	List<Plant> findAllByOrderByFinNameDesc();
 	
 	List<Plant> findAllByOrderByWtype_NameAsc();

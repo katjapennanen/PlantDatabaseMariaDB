@@ -27,7 +27,7 @@
 					<a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/addplant">Add a new plant</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/types">Add/Edit types</a>
+					<a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/types">Add/Edit care instructions</a>
 				</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0" th:action="@{/search}" th:object="${plants}" method="get">
@@ -41,13 +41,13 @@
 			<p th:inline="text" class="font-weight-light my-2">You are signed in as <p class="font-weight-bold m-2">[[${#httpServletRequest.remoteUser}]]</p></p>
 			<button type="submit" class="btn btn-info btn-sm">Sign out</button>
 		</form>
-		<h1 class="mb-5 display-4">Edit/Add care types</h1>
+		<h1 class="mb-5 display-4">Add/Edit care instructions</h1>
 		<div class="row">
 			<div class="col-sm-5">
 				<table class="table table-sm table-responsive-lg table-light table-bordered table-hover mb-4">
 					<thead class="thead table-info">
 						<tr>
-							<th>Watering type</th>
+							<th>Watering needs</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -61,12 +61,12 @@
 				<form th:object="${wtype}" th:action="@{../savewater}" action="#" method="post">
 					<div class="form-group">
 						<input type="hidden" th:field="*{waterId}" />
-						<label for="watertype">Watering type: </label>
+						<label for="watertype">Watering frequency: </label>
 						<input type="text" class="form-control" id="watertype" th:field="*{name}" required/>	
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-auto">
-							<input type="submit" class="btn btn-info mb-0" value="Save watering">
+							<input type="submit" class="btn btn-info mb-0" value="Save watering frequency">
 						</div>
 						<div class="form-group col-md-auto">
 							<a class="btn btn-secondary" href="/canceledit">Cancel edit</a>
@@ -78,7 +78,7 @@
 				<table class="table table-sm table-responsive-lg table-light table-bordered table-hover mb-4">
 					<thead class="thead table-info">
 						<tr>
-							<th>Fertilizing type</th>
+							<th>Fertilizing needs</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -92,12 +92,12 @@
 				<form th:object="${ftype}" th:action="@{../savefertilizer}" action="#" method="post">
 					<div class="form-group">
 						<input type="hidden" th:field="*{fertilizerId}"  />
-						<label for="fertilizertype">Fertilizer type: </label>
+						<label for="fertilizertype">Fertilizer frequency: </label>
 						<input type="text" class="form-control" id="fertilizertype" th:field="*{name}" required/>	
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-auto">
-							<input type="submit" class="btn btn-info mb-0" value="Save fertilizer">
+							<input type="submit" class="btn btn-info mb-0" value="Save fertilizing frequency">
 						</div>
 						<div class="form-group col-md-auto">
 							<a class="btn btn-secondary" href="/canceledit">Cancel edit</a>
@@ -109,7 +109,7 @@
 				<table class="table table-sm table-responsive-lg table-light table-bordered table-hover mb-4">
 					<thead class="thead table-info">
 						<tr>
-							<th>Light type</th>
+							<th>Light conditions</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -123,12 +123,12 @@
 				<form th:object="${ltype}" th:action="@{../savelight}" action="#" method="post">
 					<div class="form-group">
 						<input type="hidden" th:field="*{lightId}" />
-						<label for="lighttype">Light type: </label>
+						<label for="lighttype">Light condition: </label>
 						<input type="text" class="form-control" id="lighttype" th:field="*{name}" required/>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-auto">
-							<input type="submit" class="btn btn-info mb-0" value="Save lighting">
+							<input type="submit" class="btn btn-info mb-0" value="Save lighting need">
 						</div>
 						<div class="form-group col-md-auto">
 							<a class="btn btn-secondary" href="/canceledit">Cancel edit</a>

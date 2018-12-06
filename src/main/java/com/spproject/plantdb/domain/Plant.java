@@ -41,7 +41,7 @@ public class Plant {
 	}
 
 	public Plant(String engName, String latName, String finName, WaterType wtype, LightType ltype, FertilizerType ftype,
-			String repotDate, String note) {
+			String repotDate, String note, String imgUrl) {
 		super();
 		this.engName = engName;
 		this.latName = latName;
@@ -51,6 +51,7 @@ public class Plant {
 		this.ftype = ftype;
 		this.repotDate = repotDate;
 		this.note = note;
+		this.imgUrl= imgUrl;
 	}
 
 	public Long getPlantId() {
