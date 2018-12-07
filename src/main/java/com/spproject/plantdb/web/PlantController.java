@@ -1,5 +1,8 @@
 package com.spproject.plantdb.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,11 +35,14 @@ public class PlantController {
 	@Autowired
 	private FertilizerTypeRepository frepo;
 
-
-	// Show all plants
+	// Show all plants and get plant count
 	@RequestMapping(value = "/home")
 	public String home(Model model) {
-		model.addAttribute("plants", prepo.findAll());
+		List<Plant> plants = new ArrayList<>();
+		plants = (List<Plant>) prepo.findAll();
+		int plantCount = plants.size();
+		model.addAttribute("plants", plants);
+		model.addAttribute("count", plantCount);
 		return "home";
 	}
 
